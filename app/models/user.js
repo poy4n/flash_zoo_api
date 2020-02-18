@@ -1,7 +1,7 @@
 const db = require("../../db/db");
 
 // select all users
-function all() {
+function allUsers() {
   return db.query("select id from users;");
 }
 
@@ -16,13 +16,13 @@ function findByEmail(email) {
 }
 
 // insert email to table
-function create(email) {
+function createUser(email) {
   return db.query("insert into users set email = $1;", [email]);
 }
 
 module.exports = {
-  all: all,
+  allUsers: allUsers,
   findById: findById,
   findByEmail: findByEmail,
-  create: create
+  createUser: createUser
 };
