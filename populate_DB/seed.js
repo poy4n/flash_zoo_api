@@ -5,13 +5,12 @@ const db = require('../db/db')
 
 let file = fs.readFileSync('animal_list.txt')
 
-animal_array = []
+let animalArray = []
 
-animal_array = file.toString().split('\n')
-// console.log(animal_array)
+animalArray = file.toString().split('\n')
 
 
-animal_array.forEach(element => {
+animalArray.forEach(element => {
     db.query('INSERT INTO words (english) VALUES ($1);', [element])
 });
 
