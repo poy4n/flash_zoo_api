@@ -1,0 +1,23 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+// require the exported routs
+const usersController = require('./app/controllers/usersController');
+
+const app = express();
+const port = 8080;
+
+//middleware which will parse JSON request 
+app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+    res.json({welcome: 'flash_zoo_api'})
+});
+
+// use the controller, the order is important, that's why it's located after the '/' rout
+app.use('/api', usersController);
+
+
+app.listen(port, () => {
+    console.log(`flash_zoo_api listening on ${port}`);    
+})
