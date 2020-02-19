@@ -7,7 +7,7 @@ function selectWord(foreignLang, randomNum) {
 
 // find an image to display already selected in card
 function findImage(id) {
-  return db.query("select image_url from words where id = $1;", [id]);
+  return db.query("select image_url, english from words where id = $1;", [id]);
 }
 
 // add / update image from api

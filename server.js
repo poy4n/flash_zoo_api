@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 // require the exported routs
 const usersController = require('./app/controllers/usersController');
 const cardsController = require('./app/controllers/cardsController');
+const wordsController = require('./app/controllers/wordsController');
 
 const app = express();
 const port = 8080;
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api', usersController);
 app.use('/api', cardsController);
 
+app.use('/api', wordsController);
 
 app.listen(port, () => {
     console.log(`flash_zoo_api listening on ${port}`);    

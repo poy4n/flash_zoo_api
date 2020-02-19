@@ -27,5 +27,5 @@ function selectCard(status, user_id, language ) {
 
 module.exports = {
     newCard: newCard,
-    selectCard: selectCard,
+    selectCard: selectCard
 };
