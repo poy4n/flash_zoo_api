@@ -11,7 +11,7 @@ const app = express();
 const port = 8080;
 
 app.use(cors());
-app.options('*', cors());  // enable pre-flight
+//app.options('*', cors());  // enable pre-flight
 
 //middleware which will parse JSON request 
 app.use(bodyParser.json());
