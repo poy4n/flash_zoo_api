@@ -1,6 +1,7 @@
 const pg = require("pg");
+require('dotenv').config()
 
-const pool = new pg.Pool({ database: "flashzoo", user: "pt", password: "1234" });
+const pool = new pg.Pool(process.env);
 
 module.exports = {
   query: (sql, params) => {
