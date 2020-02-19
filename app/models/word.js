@@ -26,3 +26,5 @@ module.exports = {
   addImage: addImage,
   translateWord: translateWord
 };
+
+
