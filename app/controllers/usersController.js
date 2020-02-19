@@ -32,10 +32,22 @@ router.get('/user/id', (req, res) => {
 
 // create user
 router.post('/user', (req, res) => {
-
     User
-        .createUser(req.body.email)
-        .then(query_res => res.json({ results: query_res.rows}))
+        .findByEmail(req.body.email)
+        .then(query_find_res => {
+            if(query_find_res.rows.length > 0) {
+                return res.json({user: query_find_res.rows})
+            } else {
+                User
+                    .createUser(req.body.email)
+                    .then(query_create_res => res.json({user: query_create_res.rows}))
+                    .catch(err =>
+                        setImmediate(() => {
+                            throw err
+                        })
+                    );
+            }
+        })
         .catch(err =>
             setImmediate(() => {
                 throw err
