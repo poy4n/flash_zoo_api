@@ -11,6 +11,22 @@ router.post('/card/play', (req, res) => {
     res.json({ message: 'added to db!'})
 })
 
+// finds all cards by status, user ID and language
+router.get('/card/play', (req, res) => {
+    card
+        .selectCard(req.body.status, req.body.user_id, req.body.language)
+        .then(query_res => {
+            res.json({ card: query_res.rows})
+        })
+        .catch(err => 
+            setImmediate(() => {
+                throw err
+            })
+        );   
+});
+
+
 
 
 module.exports = router;
+
