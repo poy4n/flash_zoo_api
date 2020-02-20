@@ -8,6 +8,9 @@ const axios = require('axios')
 // translate word to target language
 router.post('/words/translate', (req,res) => {
     // check DB for translation
+    console.log(req.body.lang)
+    console.log(req.body.word_id)
+
     Word
         .findWordByLanguage(req.body.lang, req.body.word_id)
         
@@ -40,41 +43,51 @@ router.post('/words/translate', (req,res) => {
             }
         })
 })
+const unsplashKey1 = 'fyrLKNWhabtDIvwOgb_51aJ4PSmhmdZOn_8NHlqPlXo'
+const unsplashKey2 = 'aQzSvTmni6PlAWA5D55d07ydKUx2l2t5ibbZpaz_F6Q'
+const masterKey = unsplashKey2
 
 // add image to table
 router.post('/words', (req, res) => {
-    console.log(`body: ${req.body}`)
+    console.log(req.body)
     //check DB for image
     Word
         .findImage(req.body.word_id)
         .then(query_res => {
-            console.log(query_res.rows[0])
-            console.log(query_res.rows.length)
+            // console.log(query_res.rows[0])
+            // console.log(query_res.rows.length)
             if(query_res.rows.length !== 0 && query_res.rows[0].image_url !== null) {
                 // if yes - return result
                 return res.json({image_url: query_res.rows})
 
             } else {
-                console.log(query_res.rows[0].english)
+                // console.log(query_res.rows[0].english)
                 // if no - search api for image url and save in DB and return result
-                const url = `https://api.unsplash.com/search/photos?client_id=fyrLKNWhabtDIvwOgb_51aJ4PSmhmdZOn_8NHlqPlXo&query=${query_res.rows[0].english}&per_page=1`
+                const url = `https://api.unsplash.com/search/photos?client_id=${ masterKey }&query=${query_res.rows[0].english}&per_page=1`
                 // console.log(url)
+                
                 axios.get(url).then(({ data }) => {
-                    console.log(data.results)
+                    
+                    // console.log(data.results)
+                    // console.log(data.results[0].urls.small)
+
                     Word
                         .addImage(data.results[0].urls.small, query_res.rows[0].english, req.body.word_id )
-                        .then(query_res_update => res.json( {results: query_res_update.rows}))       
-                });
+                        .then(query_res_update => res.json({ results: query_res_update.rows}))
+                })
             }
         });
 });
 
-// generate 7 words from the table
-// router.get('/words/memory', (req,res) => {
-//     Word
-//     .generateWord(req.body.lang, )
-//     .then()
-// })
+router.get('/words', (req, res) => {
+    const userData = JSON.parse(req.query.userInfo)
 
+    // construct random number
+    let randomNum = 7
+
+    Word
+        .generateWord(userData.language, randomNum)
+        .then(queryRres => res.json(queryRres.rows))
+})
 
 module.exports = router;

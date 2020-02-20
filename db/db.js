@@ -1,7 +1,7 @@
 const pg = require("pg");
 require('dotenv').config()
 
-const pool = new pg.Pool(process.env);
+const pool = new pg.Pool({ database: process.env.DATABASE });
 
 module.exports = {
   query: (sql, params) => {
