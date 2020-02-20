@@ -2,7 +2,7 @@ const db = require("../../db/db");
 
 // max num of 7 - select random words
 function generateWord(foreignLang, randomNum) {
-  return db.query("select id, english, $1, image_url from words order by random() limit $2;"[foreignLang, randomNum]);
+  return db.query("select id, english, $1, image_url from words order by random() limit $2;", [foreignLang, randomNum]);
 }
 
 function findWordById(id) {
