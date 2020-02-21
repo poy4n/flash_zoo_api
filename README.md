@@ -1,6 +1,4 @@
-A readme.md file with:
-Explanations of the technologies used
-Descriptions of any unsolved problems or major hurdles your team had to overcome
+https://glacial-bayou-21611.herokuapp.com/
 
 # Flash Zoo API Application
 
