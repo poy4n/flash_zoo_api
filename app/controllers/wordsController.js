@@ -70,7 +70,7 @@ router.post('/words', (req, res) => {
                     
                     console.log(data.results[0])
                     // console.log(data.results[0].urls.small)
-                    let image = "/images/empty.jpg"
+                    let image = "./images/empty.jpg"
                     if(data.results.length > 0) {
                         image = data.results[0].urls.small
                     }
