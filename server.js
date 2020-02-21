@@ -8,12 +8,12 @@ const cardsController = require('./app/controllers/cardsController');
 const wordsController = require('./app/controllers/wordsController');
 
 const app = express();
-const port = 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(cors());
-//app.options('*', cors());  // enable pre-flight
+// app.options('*', cors());  // enable pre-flight
 
-//middleware which will parse JSON request 
+//middleware which will parse JSON request
 app.use(bodyParser.json());
 
 
@@ -26,6 +26,6 @@ app.use('/api', usersController);
 app.use('/api', cardsController);
 app.use('/api', wordsController);
 
-app.listen(port, () => {
-    console.log(`flash_zoo_api listening on ${port}`);    
+app.listen(PORT, () => {
+    console.log(`flash_zoo_api listening on ${PORT}`);    
 })

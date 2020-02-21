@@ -43,9 +43,9 @@ router.post('/words/translate', (req,res) => {
             }
         })
 })
-const unsplashKey1 = 'fyrLKNWhabtDIvwOgb_51aJ4PSmhmdZOn_8NHlqPlXo'
-const unsplashKey2 = 'aQzSvTmni6PlAWA5D55d07ydKUx2l2t5ibbZpaz_F6Q'
-const masterKey = unsplashKey2
+// const unsplashKey1 = 'fyrLKNWhabtDIvwOgb_51aJ4PSmhmdZOn_8NHlqPlXo'
+// const unsplashKey2 = 'aQzSvTmni6PlAWA5D55d07ydKUx2l2t5ibbZpaz_F6Q'
+// const masterKey = unsplashKey1
 
 // add image to table
 router.post('/words', (req, res) => {
@@ -58,19 +58,19 @@ router.post('/words', (req, res) => {
             // console.log(query_res.rows.length)
             if(query_res.rows.length !== 0 && query_res.rows[0].image_url !== null) {
                 // if yes - return result
-                return res.json({image_url: query_res.rows})
+                return res.json({results: query_res.rows})
 
             } else {
                 // console.log(query_res.rows[0].english)
                 // if no - search api for image url and save in DB and return result
-                const url = `https://api.unsplash.com/search/photos?client_id=${ masterKey }&query=${query_res.rows[0].english}&per_page=1`
+                const url = `https://api.unsplash.com/search/photos?client_id=${ process.env.UNSPLASH_KEY }&query=${query_res.rows[0].english}&per_page=1`
                 console.log(url)
                 
                 axios.get(url).then(({ data }) => {
                     
                     console.log(data.results[0])
                     // console.log(data.results[0].urls.small)
-                    let image = "./public/images/empty.jpg"
+                    let image = "/images/empty.jpg"
                     if(data.results.length > 0) {
                         image = data.results[0].urls.small
                     }
