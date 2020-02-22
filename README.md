@@ -1,25 +1,21 @@
-https://glacial-bayou-21611.herokuapp.com/
-
 # Flash Zoo API Application
+Click here to access: https://beasuf.github.io/flash_zoo_client/
 
-Flash Zoo API is an API application to server our Flash Zoo Client application.
-The client application requests for user email, cards learnt in each languages, cards to be displayed, photos to be displayed, their english name as well as their translation.
+Flash Zoo is an educational Single Page Application game. In development two APIs are utilised. The translation API is used for translating name of animals from English into three different languages. A photo API is used to collect images in order to assign them to the chosen words. Then flashzoo cards are generated on the DOM.
 
-The Flash Zoo uses two APIs, one for the photos and another one for the translation.
-
-## Wireframe:
+## User Interface Diagram:
 
 <img src="wireFrame.jpg">
 
-To remove as much friction as possible we decided to not use passwords for the game. The user would only need to enter an email address and if it did not exist in our database we would then add it otherwise just fetch previous records.
+## Game Play
 
-The following step is to choose which language you would like to learn.
+To optimise the user journey on the page there is no need to signup or signin. The user only needs to enter an email address to enter and to choose between three given languages.
 
-Then the user would be presented with 7 cards with a photo and the animal name in English and the language chosen in the previous screen. The player would try to memorise the names and then press play.
+In memory screen the user will be presented with 7 cards each with a photo, the animal name in English as well as the translation in chosen language from the previous screen. Now the user can memorise each image with the matching foreign language.
 
-The following screen the user will see the 7 cards with only the photo and the animal names in the bottom of the screen in random order. Each name has a color. The user has to match the names with the right photo. When it's a match the card will have borders added to it with the color of the matching name, if it's not a match then the user needs to keep trying to find the right card with a maximum of 10 attempts.
+In the game screen the user will see the 7 cards with the photo and the matching foreign language. Each name is assigned to a color and the user has 10 clicks to match the names with the right photo. When it's a match the card will change its background into the color of the matching name with a flip animation. If it's not a match the card will blink as a sign of an error and then the user can keep trying to find the right card until the max number of clicks is reached.
 
-Once finished the user is shown a summary screen displaying the score and the cards learnt.
+In the rersult summary the user will be preseneted with all cards played and a score line to show number of correct and incorrect matches.
 
 ## Technologies used:
 
@@ -34,5 +30,11 @@ Once finished the user is shown a summary screen displaying the score and the ca
 - Express
 - Unsplash API (photo)
 - Yandex API (translation)
+- Data Structure between front-end & back-end
 
 ## Challenges:
+
+- Interpreting the API information
+- Data transformation from API to controllers
+- MVC design pattern
+- Use of Async functions
